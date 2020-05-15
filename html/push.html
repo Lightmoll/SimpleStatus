@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Push Status</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link rel="stylesheet" type="text/css" href="static/push.css">
+</head>
+<body>
+	<nav>
+		<a href="/">HOME</a>
+		<a href="/logout">LOG OUT</a>
+	</nav>
+
+	<header>
+		<h1>Push Status</h1>
+		<p>Here you can push your status to the main page</p>
+	</header>
+
+	<main>
+		<form method="POST">
+			<label>Title:</label>
+			<input type="text" name="title" id="titleEl">
+
+			<label>Position:</label>
+			<input type="text" name="position" id="posEl">
+
+			<label>Body:</label>
+			<textarea name="body" id="bodyEl"></textarea>
+
+			<button type="submit">Submit</button>
+		</form>
+	</main>
+
+<script type="text/javascript">
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+}
+
+function showPosition(position) {
+  document.getElementById("posEl").value = position.coords.latitude +
+  "," + position.coords.longitude;
+}
+
+function gen_title(text, lenMax) {
+ 	var curr_len = 0;
+
+ 	var words = text.split(" ");
+
+ 	words = words.filter(word => word != "");
+
+ 	for (var i = 0; i < words.length; i++) {
+ 		curr_len += words[i].length;
+ 		if (curr_len > lenMax) {
+ 			pot_ret = words.slice(0,i-1).join(" ");
+ 			if (pot_ret != "") {
+ 				return pot_ret;
+ 			} else {
+ 				return words[0].slice(0,lenMax);
+ 			}
+ 		}
+ 	}
+ 	return words.join(" ");
+ }
+ var title_changed = false;
+document.getElementById("bodyEl").oninput = function(){
+	if (!title_changed) {
+		document.getElementById("titleEl").value = gen_title(document.getElementById("bodyEl").value, 20);
+	}
+};
+
+document.getElementById("titleEl").onblur = function() {
+	if (document.getElementById("titleEl").value == "") {
+		title_changed = false;
+	} else {
+		title_changed = true;
+	}
+}
+
+getLocation();
+</script>
+</body>
+</html>

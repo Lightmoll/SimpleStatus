@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Status</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link rel="stylesheet" type="text/css" href="static/admin.css">
+</head>
+<body>
+
+	<div class="pop_up" id="pop_up">E-Mail saved! Feature will be added soon.</div>
+
+<nav>
+</nav>
+
+<header>
+	<h1>Your's Status Updates</h1>
+	<p>Admin Interface</p>
+</header>
+
+<main>
+	<div id="content">
+		{% for entry in data %}
+		<form action="/push/edit" class="post">
+			<input class ="title" value='{{ entry["title"] | e }}'>
+
+			<input class="location" value='{{ entry["location"] | e }}'>
+			<span class="time">{{ entry["time"] | safe}}</span>
+
+			<textarea>{{ entry["body"] | safe }}</textarea>
+
+			<button class="admin_edit" type="submit">SEND EDIT</button>
+		</form>
+		{% endfor %}
+	</div>
+</main>
+
+<footer><span>(c) lightmoll | </span><a href="push">login</a></footer>
+
+<script type="text/javascript">
+	var hash = window.location.hash.substr(1);
+	if (hash == "email_added") {
+		document.getElementById("pop_up").style.display = "unset";
+	}
+</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" src="static/autoresize.js"></script>
+</body>
+</html>

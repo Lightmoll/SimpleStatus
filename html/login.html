@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<link rel="stylesheet" type="text/css" href="static/push.css">
+</head>
+<body>
+
+	<div class="pop_up" id="wrong_password_pop_up">Wrong Password!</div>
+	<header>
+		<h1>Push Status</h1>
+		<p>Please Log-In first. You will be logged out in any other session.</p>
+	</header>
+
+	<main>
+		<form method="POST">
+			<label>Password:</label>
+			<input type="password" name="password">
+
+			<button type="submit">Submit</button>
+		</form>
+	</main>
+
+<script type="text/javascript">
+	var hash = window.location.hash.substr(1);
+	if (hash == "wrong_password") {
+		document.getElementById("wrong_password_pop_up").style.display = "unset";
+	}
+</script>
+
+</body>
+</html>

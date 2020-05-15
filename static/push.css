@@ -1,0 +1,28 @@
+ 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form *{
+  margin-bottom: 5px;
+  font-family: Arial;
+}
+
+form input, textarea {
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+form button {
+  max-width: 100px;
+  padding: 5px;
+}
+
+form textarea {
+  height: 30vh;
+}
+
+header {
+  padding-top: 30px;
+} 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Status</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+
+	<div class="pop_up" id="pop_up">E-Mail saved! Feature will be added soon.</div>
+
+<nav>
+<!--
+	<a href="/en/">En</a>
+	<a href="/de/">De</a>
+-->
+</nav>
+
+<header>
+	<h1>Status Updates</h1>
+		<p>
+		If you like, you can subscribe to automatic push notifications via mail. When I haven't posted in 2 days, you will get a notification.
+	</p>
+	<form method="POST">
+		<input type="text" name="email" placeholder="E-Mail">
+		<button type="submit">Submit</button>
+	</form>
+</header>
+
+<main>
+	<div id="content">
+		{% for entry in data %}
+		<div class="post">
+			<h1>{{ entry["title"] | e }}</h1>
+
+			<a class="location" target="_blank" href='https://www.google.com/maps/search/?api=1&query={{ entry["location"] | e }}'>{{ entry["location"] | e }}</a>
+			<span class="time">{{ entry["time"] | safe}}</span>
+
+			<p>{{ entry["body"] | safe }}</p>
+		</div>
+		{% endfor %}
+	</div>
+</main>
+
+<footer>(c) lightmoll | <a href="push">login</a></footer>
+
+<!--
+<script type="text/javascript" src="static/install_sw.js"></script>
+-->
+<script type="text/javascript" src="static/main.js"></script>
+</body>
+</html>
