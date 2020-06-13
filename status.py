@@ -15,7 +15,6 @@ data_path = os.getcwd()
 session_str_path = os.path.join(data_path, "data/session_str.txt")
 db_path = os.path.join(data_path, "data/status.db")
 e_mail_list_path = os.path.join(data_path,  "data/e_mail.db")
-passwd_path = "passw.db"
 
 debug = False
 

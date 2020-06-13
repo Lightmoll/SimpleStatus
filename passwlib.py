@@ -1,7 +1,7 @@
 from passlib.hash import pbkdf2_sha256
 #external lib
 
-DEFAULT_PASSWD_URI = "passw.db"
+DEFAULT_PASSWD_URI = "data/passw.db"
 
 def verify_password(in_passw):
     base_passw_hash = ""
