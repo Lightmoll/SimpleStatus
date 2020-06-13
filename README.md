@@ -1,10 +1,11 @@
 # SimpleStatus
- 
+
 _fast & super lightweight status server_
 
 The server is build on Flask, it is designed to provide a minimalistic status of ones location for traveling, etc.
 
 # Setup
+To install all necessary libraries run `pip install -r requirements.txt`.
 
 ## Run the Server
 For testing purposes you can simply call the server with `python3 server.py`. The server listens at port 8500 and the default password is admin.
