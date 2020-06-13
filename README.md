@@ -14,7 +14,7 @@ Note, that the debug mode is activated like this. __Do not use this in productio
 I ran this server in production for about half a year without any issues on a low traffic server. I recommend using ngnix and gunicorn3. During login the password is POSTed to the server as clear text, for this reason alone __HTTPS is necessary__ in a production build. I can recommend Let's Encrypt for free SSL certificates.
 
 ## Set a password
-At this point you have to call the `setPassword.py` script to change the password. It will save the password as a SHA256 hash, unsalted.
+At this point you have to call the `setPassword.py` script to change the password. It will save the password as a salted pbkdf2 SHA256 hash.
 
 # Problems
-The server desperately needs a better database and preferably password salting.
+The server desperately needs a better database.

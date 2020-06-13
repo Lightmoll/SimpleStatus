@@ -1,12 +1,10 @@
-import hashlib
+import passwlib
 
 print("Please enter new Password")
 passw = input("Password: ")
 print("You entered: [next line]")
 print(passw)
 
-hashpasswd = hashlib.sha256(bytes(passw, encoding="utf-8")).hexdigest()
-with open("passw.db", "w") as file:
-	file.write(str(hashpasswd))
+passwlib.set_password(passw)
 
 print("Password Successfully Updated!")

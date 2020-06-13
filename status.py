@@ -1,12 +1,14 @@
 from utils import html_sanatize
+import passwlib
+
+import os
+import math
+import random
+import string
+import datetime
 
 from flask import Flask, request, send_from_directory
 from flask import render_template, redirect, make_response
-import datetime
-import os
-import hashlib
-import math
-import random, string
 app = Flask(__name__)
 
 data_path = os.getcwd()
@@ -70,12 +72,9 @@ def push():
 		return resp
 	else:
 		try:
-			inp = request.form["password"]
-			with open(passwd_path, encoding="utf-8") as file:
-				passwd = file.read()
-			hashed_inp = hashlib.sha256(bytes(inp, encoding="utf-8")).hexdigest()
+			input_password = request.form["password"]
 
-			if hashed_inp == passwd:
+			if passwlib.verify_password(input_password):
 				curr_session = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(120))
 				with open(session_str_path, "w", encoding="utf-8") as file:
 					file.write(curr_session)
@@ -87,7 +86,6 @@ def push():
 					resp.set_cookie("session", curr_session, expires=expire_date)
 				else:
 					resp.set_cookie("session", curr_session, secure=True, httponly=True, samesite="Strict", expires=expire_date)
-					
 
 				resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
 				resp.headers["Pragma"] = "no-cache"
@@ -97,7 +95,7 @@ def push():
 			else:
 				return redirect("#wrong_password", 302)
 
-		except Exception as e:
+		except Exception:
 			if curr_session == request.cookies.get("session"):
 				with open(db_path, "a", encoding="utf-8") as file:
 						file.write(request.form["title"] + "\n")
